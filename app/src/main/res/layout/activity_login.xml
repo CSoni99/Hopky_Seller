@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="412dp"
+        android:layout_height="325dp"
+        android:contentDescription="logo_login"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/logo_hop_white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/background_login_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/phoneEt"
+            android:layout_width="301dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/backgroiund_text_login"
+            android:ems="10"
+            android:foregroundGravity="center"
+            android:gravity="center_vertical"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:paddingLeft="25dp"
+            android:textColor="#000000"
+            android:textColorHint="#3F51B5"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+
+        <EditText
+            android:id="@+id/codeEt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/backgroiund_text_login"
+            android:ems="10"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:hint="OTP"
+            android:inputType="number"
+            android:padding="15dp"
+            android:textColor="#000000"
+            android:textColorHint="#706464"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/ResendOtp"
+            android:layout_width="152dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:text="Resend OTP?"
+            android:textColor="#000000"
+            android:textIsSelectable="false"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/sendOTP_btn"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="35dp"
+            android:text="Send OTP" />
+
+        <Button
+            android:id="@+id/validate_otp_btn"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Verify..."
+            android:visibility="gone" />
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
