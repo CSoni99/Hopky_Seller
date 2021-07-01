@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hopky_Seller.noActionBar">
-        <activity android:name=".Dashboard"></activity>
+        <activity
+            android:name=".CreateAccount"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Dashboard" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>

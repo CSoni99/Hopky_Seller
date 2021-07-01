@@ -23,13 +23,12 @@ import java.util.concurrent.TimeUnit
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var googleSignInClient: GoogleSignInClient
-    private val RC_SIGN_IN: Int = 123
-
     private var forceResendingToken: PhoneAuthProvider.ForceResendingToken?= null
     private var mCallBacks : PhoneAuthProvider.OnVerificationStateChangedCallbacks? = null
     private var mVerificationId : String?= ""
     private lateinit var firebaseAuth: FirebaseAuth
+
+//    val user = Firebase.firebaseAuth.currentUser
 
     private val TAG = "MAIN_TAG"
 
@@ -53,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
         mCallBacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
-                SafetyNet.getClient(this@LoginActivity).verifyWithRecaptcha("AIzaSyDt608qDis9DWxU1xRK4CV5Bzdftamzjmo")
+                SafetyNet.getClient(this@LoginActivity).verifyWithRecaptcha("AIzaSyBumT1SORUC7YIpIs3QdPhD0oWQhZKXit0")
                 signinWithPhoneAuthCredential(phoneAuthCredential)
             }
 
@@ -72,7 +71,8 @@ class LoginActivity : AppCompatActivity() {
 
                 Toast.makeText(this@LoginActivity , "Verification Code Sent" , Toast.LENGTH_SHORT).show()
 
-                phoneEt.visibility = View.INVISIBLE
+                phoneEt.isEnabled = false
+
                 sendOTP_btn.visibility= View.GONE
                 validate_otp_btn.visibility = View.VISIBLE
                 codeEt.visibility = View.VISIBLE
@@ -120,9 +120,29 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = firebaseAuth.currentUser
         if(currentUser != null){
+//
+//            val mainActivityIntent = Intent(this,Dashboard::class.java)
+//            mainActivityIntent.putExtra("currentUser",currentUser)
+//            startActivity(mainActivityIntent)
 
-            val mainActivityIntent = Intent(this,Dashboard::class.java)
-            startActivity(mainActivityIntent)
+            val user = firebaseAuth.currentUser
+            user?.let {
+                // Name, email address, and profile photo Url
+                val name = user.displayName
+
+                if (name == ""){
+                    Toast.makeText(this , "Create your profile" , Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this , "Welcome" , Toast.LENGTH_SHORT).show()
+
+                    val mainActivityIntent = Intent(this,CreateAccount::class.java)
+                    startActivity(mainActivityIntent)
+                }
+                else{
+                    Toast.makeText(this , "Welcome  $name" , Toast.LENGTH_SHORT).show()
+                  val mainActivityIntent = Intent(this,Dashboard::class.java)
+                  startActivity(mainActivityIntent)
+                }
+            }
         }
         else{
             phoneEt.visibility = View.VISIBLE
@@ -181,6 +201,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this , "Logged In as $phone" , Toast.LENGTH_SHORT).show()
 
                 //Start profile Activity
+
                 startActivity(Intent(this,Dashboard::class.java))
             }
             .addOnFailureListener { e->
@@ -188,5 +209,6 @@ class LoginActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 Toast.makeText(this , "${e.message}" , Toast.LENGTH_LONG).show()
             }
+
     }
     }
